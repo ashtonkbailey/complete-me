@@ -37,7 +37,6 @@ describe('Trie', () => {
 
     prefixTrie.insert('hello');
     prefixTrie.insert('hellen');
-    prefixTrie.suggest('he');
-    assert.equal(finalArray, ['hello', 'hellen']);
+    assert.deepEqual(prefixTrie.suggest('he'), [ 'hello', 'hellen']);
   })
 })
