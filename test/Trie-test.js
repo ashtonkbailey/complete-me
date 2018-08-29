@@ -1,5 +1,9 @@
 import { assert } from 'chai';
 import Trie from "../lib/Trie.js"
+import fs from 'fs';
+
+const text = "/usr/share/dict/words";
+const dictionary = fs.readFileSync(text).toString().trim().split('\n');
 
 describe('Trie', () => {
   let trie;
@@ -28,7 +32,6 @@ describe('Trie', () => {
     prefixTrie.insert('mambo');
     prefixTrie.insert('animus');
     prefixTrie.insert('iota');
-    console.log(JSON.stringify(prefixTrie, null, 3));
     assert.deepEqual(Object.keys(prefixTrie.root.children), ['m', 'a', 'i'])
   })
 
@@ -38,5 +41,14 @@ describe('Trie', () => {
     prefixTrie.insert('hello');
     prefixTrie.insert('hellen');
     assert.deepEqual(prefixTrie.suggest('he'), [ 'hello', 'hellen']);
+  })
+
+  it('should be able to take the dictionary', () => {
+    var prefixTrie = new Trie();
+
+    prefixTrie.populate(dictionary);
+
+    prefixTrie.count();
+    assert.equal(prefixTrie.count(), 235886)
   })
 })
