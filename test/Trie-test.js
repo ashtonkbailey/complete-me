@@ -32,12 +32,12 @@ describe('Trie', () => {
     assert.deepEqual(Object.keys(prefixTrie.root.children), ['m', 'a', 'i'])
   })
 
-  it('should be able to suggest ', () => {
+  it('should be able to suggest completed word list based on user input', () => {
     var prefixTrie = new Trie();
 
     prefixTrie.insert('hello');
     prefixTrie.insert('hellen');
     prefixTrie.suggest('he');
-    // assert.
+    assert.equal(finalArray, ['hello', 'hellen']);
   })
 })
